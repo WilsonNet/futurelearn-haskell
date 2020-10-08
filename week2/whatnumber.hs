@@ -1,4 +1,4 @@
-check :: Int -> Int -> (Bool, String)
+check :: Int -> Int -> Bool
 check number guess
      = if number == guess 
           then (True, "You Win")
@@ -7,23 +7,25 @@ check number guess
                else (False, "Guess Lower")
 
 
-turn :: Int -> Int -> Int -> IO ()
-turn number n
+turn :: Int -> Int -> Bool -> String -> IO ()
+turn number n status tip
   do if n == 0 
-    then putStrnLn "You Lose"
-    else
-      if (head checkResult == True)
-        putStrLn tip
+    then putStrLn "You Lose"
+    else if (status == True)
+         putStrLn tip 
       else 
-        mkguess n tip
+         putStrLn tip
+         mkguess number
 
 mkguess :: Int -> IO()
-mkguess tip n = 
-    do putStrlLn (tip)
-       putStrLn "Enter your guess: "
-       q <- getLine
-       let (win, tip) = check number guess q
+mkguess number n = 
+  do putStrLn "Enter your guess: "
+     q <- getLine
+     let (status, tip) = check number guess q
+     let n' = if status then n else n-1
+     turn n' status tip
+
 
       
 whatnumber :: Int -> Int -> IO ()              
-whatnumber number n = turn number n
+whatnumber number n = turn number n False "Make your first guess"
