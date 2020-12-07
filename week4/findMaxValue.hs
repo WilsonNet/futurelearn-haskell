@@ -8,3 +8,6 @@ maxhelper x (y:ys) = maxhelper
 maxfromlist :: [Int] -> Maybe Int
 maxfromlist [] = Nothing
 maxfromlist (x:xs) = Just (maxhelper x xs)
+
+
+inc = (1+)
