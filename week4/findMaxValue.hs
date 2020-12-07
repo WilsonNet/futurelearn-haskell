@@ -11,3 +11,5 @@ maxfromlist (x:xs) = Just (maxhelper x xs)
 
 
 inc = (1+)
+
+-- fmap  inc (Just 2)
